@@ -1,8 +1,43 @@
-########################## AWS Variables
+######################################
+### Flags Variables
+######################################
+variable "deploy_aws" {
+  description = "Flag to deploy AWS services"
+  type        = bool
+  default     = true
+}
 
-########################## Azure Variables
+variable "deploy_az" {
+  description = "Flag to deploy AZURE services"
+  type        = bool
+  default     = true
+}
 
-########################## GCP Variables
+variable "deploy_gcp" {
+  description = "Flag to deploy GCP services"
+  type        = bool
+  default     = true
+}
+
+
+######################################
+### AWS Variables
+######################################
+# AWS Provider Variables
+variable "aws_region" {
+  description = "The AWS region to deploy resources in"
+  type        = string
+}
+
+
+######################################
+### Azure Variables
+######################################
+
+
+######################################
+### GCP Variables
+######################################
 # GCP Provider Variables
 variable "gcp_project" {
   description = "The GCP project ID"
