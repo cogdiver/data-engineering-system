@@ -1,11 +1,34 @@
 services:
+  des-iac:
+    container_name: des-iac
+    build:
+      context: .
+      dockerfile: ./docker/iac.Dockerfile
+    entrypoint: tail -f /dev/null
+    volumes:
+      - ./iac:/app/iac
+      - ./scripts:/app/scripts
+      - ./tasks:/app/tasks
+      - ./conn/gcp:/conn/gcp
+    env_file:
+      - ./conn/aws
+      - ./conn/az
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/conn/gcp
+
   des-frontend:
     container_name: des-frontend
     build:
       context: ./app/frontend
-      dockerfile: ./docker/frontend.Dockerfile
+      dockerfile: ../../docker/frontend.Dockerfile
+      target: dev
+    command: tail -f /dev/null
+    ports:
+      - 8082:3000
     env_file:
       - ./env/.env.frontend
+    volumes:
+      - ./app/frontend:/app
 
   des-backend:
     container_name: des-backend
@@ -16,3 +39,15 @@ services:
       - 8080:8080
     env_file:
       - ./env/.env.backend
+    volumes:
+      - ./app/backend:/app
+
+  # des-trigger:
+  #   container_name: des-trigger
+  #   build:
+  #     context: ./app/trigger/.
+  #     dockerfile: ../../docker/trigger.Dockerfile
+  #   ports:
+  #     - 8080:8080
+  #   env_file:
+  #     - ./env/.env.trigger

@@ -1,3 +1,5 @@
+conn/
+
 ### react ###
 .DS_*
 *.log
