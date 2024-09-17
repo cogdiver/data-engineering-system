@@ -13,7 +13,7 @@ locals {
   ]
 
   # components that will use service account
-  sa_components = {
+  iam_components = {
     "ui" = [
       "storage.objects.get"
     ],
