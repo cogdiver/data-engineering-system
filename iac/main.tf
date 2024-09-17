@@ -1,18 +1,12 @@
 # AWS module
 module "aws" {
-  count           = var.deploy_aws ? 1 : 0
-  source          = "./aws"
-  # region          = var.aws_region
-  # bucket_name     = var.s3_bucket_name
-  # local_directory = trimsuffix(trimspace(var.local_directory), "/")
-  # rds_sg_name     = var.aws_rds_sg_name
-  # vpc_id          = var.aws_vpc_id
-  # subnet_name     = var.aws_subnet_name
-  # db_name         = var.aws_db_name
-  # db_identifier   = var.aws_db_identifier
-  # db_username     = var.aws_db_username
-  # db_password     = var.aws_db_password
-  # ami_id          = var.aws_ami_id
+  count             = var.deploy_aws ? 1 : 0
+  source            = "./aws"
+  region            = var.aws_region
+  project_name_base = var.aws_project_name_base
+  vpc_id            = var.aws_vpc_id
+  db_username       = var.aws_db_username
+  db_password       = var.aws_db_password
 }
 
 # Azure module
