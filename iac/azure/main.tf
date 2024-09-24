@@ -1,12 +1,16 @@
 # Specify the required version of Terraform
 terraform {
-  required_version = ">= 1.0.0"
-
   # Specify the required providers and their versions
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 3.0"
+      version = "~> 4.0"
     }
   }
+}
+
+# Configure Resource Group
+resource "azurerm_resource_group" "default" {
+  name     = var.resource_group_name
+  location = var.region
 }
