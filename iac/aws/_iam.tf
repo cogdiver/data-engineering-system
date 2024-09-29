@@ -1,5 +1,5 @@
 # Create custom IAM policies for each component
-resource "aws_iam_policy" "component_policies" {
+resource "aws_iam_policy" "policies" {
   for_each = local.iam_components
 
   name        = "custom-policy-${each.key}"
@@ -13,7 +13,7 @@ resource "aws_iam_policy" "component_policies" {
 }
 
 # Create IAM roles for each component
-resource "aws_iam_role" "component_roles" {
+resource "aws_iam_role" "roles" {
   for_each = local.iam_components
 
   name = "custom-role-${each.key}"
@@ -35,6 +35,6 @@ resource "aws_iam_role" "component_roles" {
 resource "aws_iam_role_policy_attachment" "attach_policies" {
   for_each = local.iam_components
 
-  role       = aws_iam_role.component_roles[each.key].name
-  policy_arn = aws_iam_policy.component_policies[each.key].arn
+  role       = aws_iam_role.roles[each.key].name
+  policy_arn = aws_iam_policy.policies[each.key].arn
 }
