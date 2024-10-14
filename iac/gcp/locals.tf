@@ -10,6 +10,8 @@ locals {
     "cloudfunctions.googleapis.com",
     "bigquery.googleapis.com",
     "cloudbuild.googleapis.com",
+    "cloudkms.googleapis.com",
+    "secretmanager.googleapis.com"
   ]
 
   # components that will use service account
