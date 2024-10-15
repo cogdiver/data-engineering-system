@@ -13,14 +13,14 @@ module "aws" {
 module "azure" {
   count               = var.deploy_az ? 1 : 0
   source              = "./azure"
-  # resource_group_name = var.az_resource_group_name
-  # region              = var.az_region
-  # bucket_account_name = var.az_bucket_account_name
-  # bucket_name         = var.blob_bucket_name
-  # local_directory     = trimsuffix(trimspace(var.local_directory), "/")
-  # db_name             = var.az_db_name
-  # db_username         = var.az_db_username
-  # db_password         = var.az_db_password
+  resource_group_name = var.az_resource_group_name
+  region              = var.az_region
+  project_name_base   = var.az_project_name_base
+  db_username         = var.az_db_username
+  db_password         = var.az_db_password
+  providers = {
+    azurerm = azurerm
+  }
 }
 
 # GCP module

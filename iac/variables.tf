@@ -30,7 +30,7 @@ variable "aws_region" {
 }
 
 variable "aws_project_name_base" {
-  description = "The name of the S3 bucket to create"
+  description = "Base name of the AWS resources to create"
   type        = string
 }
 
@@ -54,7 +54,33 @@ variable "aws_db_password" {
 ######################################
 ### Azure Variables
 ######################################
+# Azure Provider Variables
+variable "az_resource_group_name" {
+  description = "The name of the resource group"
+  type = string
+}
 
+variable "az_region" {
+  description = "The Azure region to deploy resources in"
+  type = string
+}
+
+variable "az_project_name_base" {
+  description = "Base name of the AZURE resources to create"
+  type        = string
+}
+
+# SQL databases Variables
+variable "az_db_username" {
+  description = "The master username for the database"
+  type        = string
+}
+
+variable "az_db_password" {
+  description = "The master password for the database"
+  type        = string
+  sensitive   = true
+}
 
 ######################################
 ### GCP Variables
@@ -71,7 +97,7 @@ variable "gcp_region" {
 }
 
 variable "gcp_project_name_base" {
-  description = "The name of the GCS bucket to create"
+  description = "Base name of the GCP resources to create"
   type        = string
 }
 
