@@ -26,10 +26,10 @@ resource "azurerm_user_assigned_identity" "identities" {
 }
 
 # Assign the custom role to the Managed Identity
-resource "azurerm_role_assignment" "component_assignments" {
+resource "azurerm_role_assignment" "assignments" {
   for_each               = local.iam_components
 
   scope                  = data.azurerm_subscription.primary.id
-  role_definition_name   = azurerm_role_definition.component_roles[each.key].name
-  principal_id           = azurerm_user_assigned_identity.component_identities[each.key].principal_id
+  role_definition_name   = azurerm_role_definition.roles[each.key].name
+  principal_id           = azurerm_user_assigned_identity.identities[each.key].principal_id
 }
