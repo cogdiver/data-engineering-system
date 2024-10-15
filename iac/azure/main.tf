@@ -14,3 +14,7 @@ resource "azurerm_resource_group" "default" {
   name     = var.resource_group_name
   location = var.region
 }
+
+# Get Azure data
+data "azurerm_subscription" "primary" {}
+data "azurerm_client_config" "current" {}
