@@ -13,6 +13,8 @@ resource "azurerm_key_vault" "key_vault" {
     object_id = data.azurerm_client_config.current.object_id
 
     secret_permissions = ["Get", "List", "Set"]
+    key_permissions = ["Get", "List", "Set"]
+    storage_permissions = ["Get", "List", "Set"]
   }
 }
 
@@ -20,5 +22,5 @@ resource "azurerm_key_vault" "key_vault" {
 resource "azurerm_key_vault_secret" "secret" {
   name         = "${var.project_name_base}-secret"
   value        = "${var.project_name_base}-secret-value"
-  key_vault_id = azurerm_key_vault.kv.id
+  key_vault_id = azurerm_key_vault.key_vault.id
 }
