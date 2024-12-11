@@ -1,28 +1,23 @@
-# Step 1: Development environment
-FROM node:20 AS dev
+# Use an official Node.js runtime as a parent image
+FROM node:20-alpine AS build
+# Set the working directory in the container
 WORKDIR /app
-# Copy package.json and package-lock.json to install dependencies
+# Copy the package.json and package-lock.json files
 COPY package*.json ./
 # Install dependencies
 RUN npm install
-# Copy the rest of the application
+# Copy the rest of the application code
 COPY . .
-# RUN sudo chown -R $USER:$USER ./app
-# RUN sudo chmod -R 755 ./app
-
-# Start server in development mode
-CMD ["npm", "run", "dev"]
-
-# Step 2: Build the React app
-FROM dev AS build
-# Build the app for production
+# Build the React app
 RUN npm run build
 
-# Step 3: Serve the React app using a lightweight web server
+# Install a lightweight web server to serve the build (nginx)
 FROM nginx:alpine
-# Copy the build output to the nginx html directory
+# Copy the build folder to the nginx container
 COPY --from=build /app/build /usr/share/nginx/html
-# Expose the port nginx will serve on
-EXPOSE 80
+# Copy the Nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Expose port 8080
+EXPOSE 8080
 # Start nginx
 CMD ["nginx", "-g", "daemon off;"]

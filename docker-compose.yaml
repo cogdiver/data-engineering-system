@@ -21,10 +21,8 @@ services:
     build:
       context: ./app/frontend
       dockerfile: ../../docker/frontend.Dockerfile
-      target: dev
-    command: tail -f /dev/null
     ports:
-      - 8082:3000
+      - 8082:8080
     env_file:
       - ./env/.env.frontend
     volumes:
@@ -36,7 +34,7 @@ services:
       context: ./app/backend/.
       dockerfile: ../../docker/backend.Dockerfile
     ports:
-      - 8080:8080
+      - 8081:8080
     env_file:
       - ./env/.env.backend
     volumes:
