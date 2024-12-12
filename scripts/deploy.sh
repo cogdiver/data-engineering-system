@@ -1,11 +1,5 @@
 #!/bin/bash
 
-################################################
-# Script for Starting and Configure Service Local and on Cloud
-#
-# shell session in the running container.
-################################################
-
 # Function to display help menu
 Usage() {
     echo "Usage: $0 [OPTIONS] [-e ENVIRONMENT] [-s SERVICE]"
@@ -46,7 +40,7 @@ CloudDeployment() {
     # Start services
     for service in "${SERVICES[@]}"; do
         echo "  - Deploying $service in $ENVIRON..."
-        # ./scripts/service_deploy.sh -e $ENVIRON -s $service -c app/$service
+        ./scripts/${ENVIRON}_deploy.sh -s $service -c app/$service
     done
 }
 
