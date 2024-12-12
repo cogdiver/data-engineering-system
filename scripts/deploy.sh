@@ -35,7 +35,7 @@ LocalDeployment() {
     echo Starting services locally:
 
     for service in "${SERVICES[@]}"; do
-        echo "  - Starting pentaho-$service..."
+        echo "  - Starting des-$service..."
         UpContainer $service
     done
 }
@@ -50,7 +50,7 @@ CloudDeployment() {
     # Start services
     for service in "${SERVICES[@]}"; do
         echo "  - Deploying $service"
-        ./scripts/service_deploy.sh -e $ENVIRONMENT -s $service -c app
+        ./scripts/service_deploy.sh -e $ENVIRONMENT -s $service -c app/$service
     done
 }
 
