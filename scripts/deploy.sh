@@ -40,7 +40,7 @@ CloudDeployment() {
     # Start services
     for service in "${SERVICES[@]}"; do
         echo "  - Deploying $service in $ENVIRON..."
-        ./scripts/${ENVIRON}_deploy.sh -s $service -c app/$service
+        ./scripts/deploy_${ENVIRON}.sh -s $service -c app/$service
     done
 }
 
