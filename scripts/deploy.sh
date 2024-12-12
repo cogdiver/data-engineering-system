@@ -26,17 +26,12 @@ Usage() {
     echo "     $0 -e azure -s db -s app"
 }
 
-UpContainer() {
-    CONTAINER=des-$1
-    docker compose up $CONTAINER -d --build
-}
-
 LocalDeployment() {
     echo Starting services locally:
 
     for service in "${SERVICES[@]}"; do
         echo "  - Starting des-$service..."
-        UpContainer $service
+        docker compose up des-$service -d --build
     done
 }
 
@@ -46,7 +41,7 @@ CloudDeployment() {
     echo "TF_VAR_deploy_${ENVIRON}=true" >> env/.env.iac
 
     # Create Infrastructure
-    # ./scripts/connect.sh -s iac -u "terraform init && terraform apply --auto-approve"
+    ./scripts/connect.sh -s iac -u "terraform init && terraform apply --auto-approve"
 
     # Start services
     for service in "${SERVICES[@]}"; do

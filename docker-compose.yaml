@@ -13,6 +13,7 @@ services:
     env_file:
       - ./conn/aws
       - ./conn/az
+      - ./env/.env.iac
     environment:
       - GOOGLE_APPLICATION_CREDENTIALS=/conn/gcp
 

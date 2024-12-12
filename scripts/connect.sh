@@ -1,13 +1,5 @@
 #!/bin/bash
 
-################################################
-# Script for Starting and Entering Local Docker Containers
-#
-# This script starts a specified Docker service
-# using Docker Compose and then opens an interactive
-# shell session in the running container.
-################################################
-
 # Function to display help menu
 Usage() {
     echo "Usage: $0 [OPTIONS] [-s SERVICE] [-u USE_SHELL]"
