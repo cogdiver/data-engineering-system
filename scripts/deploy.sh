@@ -1,5 +1,10 @@
 #!/bin/bash
 
+################################################
+# Script for Starting and Configure Service Local
+# shell session in the running container.
+################################################
+
 # Function to display help menu
 Usage() {
     echo "Usage: $0 [OPTIONS] [-e ENVIRONMENT] [-s SERVICE]"
