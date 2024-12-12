@@ -1,3 +1,10 @@
+# Temporal
+iac/**/_cicd.tf
+iac/**/_governance.tf
+iac/**/_kms.tf
+iac/**/_trigger.tf
+
+
 conn/
 
 ### react ###
