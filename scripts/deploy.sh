@@ -41,37 +41,45 @@ LocalDeployment() {
 }
 
 CloudDeployment() {
-    ENVIRONMENT=$1
-    echo "Starting services in cloud ($ENVIRONMENT):"
+    ENVIRON=$1
+    echo "Starting services in cloud ($ENVIRON):"
+    echo "TF_VAR_deploy_${ENVIRON}=true" >> env/.env.iac
 
     # Create Infrastructure
-    ./scripts/connect.sh -s iac -u "terraform apply"
+    # ./scripts/connect.sh -s iac -u "terraform init && terraform apply --auto-approve"
 
     # Start services
     for service in "${SERVICES[@]}"; do
-        echo "  - Deploying $service"
-        ./scripts/service_deploy.sh -e $ENVIRONMENT -s $service -c app/$service
+        echo "  - Deploying $service in $ENVIRON..."
+        # ./scripts/service_deploy.sh -e $ENVIRON -s $service -c app/$service
     done
 }
 
 # To display current execution parameters
 DeployServices() {
-    case $ENVIRONMENT in
-        local ) LocalDeployment ;;
-        aws ) CloudDeployment aws;;
-        azure ) CloudDeployment az;;
-        \? ) echo '[Invalid parameter]'; Usage; exit 1 ;;
-    esac
+    echo "######################################" > env/.env.iac
+    echo "### Flag Variables" >> env/.env.iac
+    echo "######################################" >> env/.env.iac
+
+    for ENVIRON in "${ENVIRONMENTS[@]}"; do
+        case $ENVIRON in
+            local ) LocalDeployment ;;
+            aws ) CloudDeployment aws;;
+            azure ) CloudDeployment az;;
+            gcp ) CloudDeployment gcp;;
+            \? ) echo '[Invalid parameter]'; Usage; exit 1 ;;
+        esac
+    done
 }
 
 # Define default variables
-ENVIRONMENT="local"
+ENVIRONMENTS=()
 SERVICES=()
 
 # Parse named parameters
 while getopts "e:s:h" opt; do
     case ${opt} in
-        e ) ENVIRONMENT=$OPTARG ;;
+        e ) ENVIRONMENTS+=($OPTARG) ;;
         s ) SERVICES+=($OPTARG) ;;
         h ) Usage; exit 0 ;;
         \? ) echo '[Invalid parameter]'; Usage; exit 1 ;;

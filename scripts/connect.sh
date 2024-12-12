@@ -19,7 +19,7 @@ Usage() {
     echo "  SERVICE       Service to start and enter (db, frontend, backend, iac)"
     echo "  USE_SHELL     Shell to use (default: current user shell)"
     echo
-    echo -e "\033[1;34;46m[NOTE]\033[0m If no USE_SHELL is provided, the script will use the current user shell."
+    echo -e "[NOTE] If no USE_SHELL is provided, the script will use the current user shell."
     echo
     echo " Example:"
     echo "     $0 -s server"
@@ -31,7 +31,7 @@ Usage() {
 StartAndEnterService() {
     # Start the service using Docker Compose and enter the shell
     docker compose up des-$SERVICE -d
-    docker exec -it des-$SERVICE $USE_SHELL
+    docker exec -it des-$SERVICE sh -c "$USE_SHELL"
 }
 
 # Define default variables
