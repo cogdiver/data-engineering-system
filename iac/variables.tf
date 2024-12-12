@@ -4,19 +4,19 @@
 variable "deploy_aws" {
   description = "Flag to deploy AWS services"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "deploy_az" {
   description = "Flag to deploy AZURE services"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "deploy_gcp" {
   description = "Flag to deploy GCP services"
   type        = bool
-  default     = true
+  default     = false
 }
 
 
